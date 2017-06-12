@@ -1,0 +1,1566 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>OSF | hello Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="fragment" content="!">
+
+    <script>
+        window.Raven = {};
+        Raven.captureMessage = function(msg, context) {
+            console.error('=== Mock Raven.captureMessage called with: ===');
+            console.log('Message: ' + msg);
+            console.log(context);
+        };
+        Raven.captureException = function(err, context) {
+            console.error('=== Mock Raven.captureException called with: ===');
+            console.log('Error: ' + err);
+            console.log(context);
+        };
+    </script>
+
+    <!-- Facebook display -->
+    <meta name="og:image" content="https://cos.io/static/img/cos_center_logo_small.png"/>
+    <meta name="og:title" content="hello Settings"/>
+    <meta name="og:ttl" content="3"/>
+    <meta name="og:description" content="
+
+    Hosted on the Open Science Framework
+
+
+"/>
+
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-shim.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-sham.min.js"></script>
+    <![endif]-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"></script>
+
+    <link rel="stylesheet" href="/static/vendor/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendor/bower_components/select2/select2.css">
+    <link rel="stylesheet" href="/static/vendor/bower_components/osf-style/css/base.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+        <script src="/static/vendor/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/static/vendor/bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <!-- JQuery 3 for IE Patching -->
+    <script type="text/javascript" src="/static/vendor/jquery-compat-git/jquery-compat-git.js"></script>
+    <script type="text/javascript">
+        var $3 = jQuery.noConflict(true);
+    </script>
+    <script src="/static/public/js/vendor.js"></script>
+
+    
+    
+
+
+    <link rel="stylesheet" href="/static/css/pages/project-page.css">
+
+    <script src="/static/public/js/base-page.js"></script>
+    
+
+
+    <link href='//fonts.googleapis.com/css?family=Carrois+Gothic|Inika|Patua+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+<body data-spy="scroll" data-target=".scrollspy">
+
+        <div class="dev-mode-helper scripted" id="devModeControls">
+        <div id="metaInfo" data-bind="visible: showMetaInfo">
+            <h2>Current branch: <span data-bind="text: branch"></span></h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>PR</th>
+                    <th>Title</th>
+                    <th>Date Merged</th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: pullRequests">
+                    <tr>
+                        <td>#<a data-bind="attr: {href: url}, text: number"></a></td>
+                        <td data-bind="text: title"></td>
+                        <td data-bind="text: mergedAt"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <style>
+            #devmode {
+                position:fixed;
+                bottom:0;
+                left:0;
+                border-top-right-radius:8px;
+                background-color:red;
+                color:white;
+                padding:.5em;
+            }
+        </style>
+        <div id='devmode' data-bind='click: showHideMetaInfo'><strong>WARNING</strong>: This site is running in development mode.</div>
+    </div>
+
+    
+    
+        
+<link rel="stylesheet" href='/static/css/nav.css'>
+<div class="osf-nav-wrapper">
+
+<nav class="navbar navbar-inverse navbar-fixed-top" id="navbarScope" role="navigation">
+    <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- ko ifnot: onSearchPage -->
+      <span class="visible-xs" data-bind="click : toggleSearch, css: searchCSS">
+          <a class="osf-xs-search pull-right" style="padding-top: 12px" >
+            <span rel="tooltip" data-placement="bottom" title="Search OSF" class="fa fa-search fa-lg fa-inverse" ></span>
+          </a>
+      </span>
+      <!-- /ko -->
+      <a class="navbar-brand hidden-sm hidden-xs" href="/"><img src="/static/img/cos-white2.png" class="osf-navbar-logo" width="27" alt="COS logo"/> Open Science Framework</a>
+      <a class="navbar-brand visible-sm visible-xs" href="/"><img src="/static/img/cos-white2.png" class="osf-navbar-logo" width="27" alt="COS logo"/> OSF</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav">
+            <li id="osfNavDashboard"><a href="/dashboard">Dashboard</a></li>
+            <li id="osfNavMyProjects"><a href="/myprojects/">My Projects</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Browse <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+              <li><a href="http://localhost:5000/activity/">New Projects</a></li>
+              <li><a href="http://localhost:5000/registries/">Registries</a></li>
+              <li><a href="http://localhost:5000/meetings/">Meetings</a></li>
+              <li><a href="http://localhost:5000/preprints/">Preprints</a></li>
+          </ul>
+        </li>
+
+        <!-- ko ifnot: onSearchPage -->
+        <li class="hidden-xs" data-bind="click : toggleSearch, css: searchCSS">
+            <a class="" >
+                <span rel="tooltip" data-placement="bottom" title="Search OSF" class="fa fa-search fa-lg" ></span>
+            </a>
+        </li>
+        <!-- /ko -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle nav-user-dropdown" data-toggle="dropdown" role="button" aria-expanded="false"><span class="osf-gravatar"><img src="https://secure.gravatar.com/avatar/5b604f2862967fb982cd24057fe449ee?d=identicon&amp;s=25" alt="User gravatar"/> </span> ggg <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+              <li>
+                  <a href="/profile/"><i class="fa fa-user fa-lg p-r-xs"></i> My Profile</a>
+              </li>
+              <li>
+                  <a href="/support/" ><i class="fa fa-life-ring fa-lg p-r-xs"></i> Support</a>
+              </li>
+
+              <li>
+                  <a href="/settings/"><i class="fa fa-cog fa-lg p-r-xs"></i> Settings</a>
+              </li>
+              <li>
+                  <a href="/logout/"><i class="fa fa-sign-out fa-lg p-r-xs"></i> Log out</a>
+              </li>
+
+          </ul>
+        </li>
+          </ul>
+    </div><!--/.navbar-collapse -->
+    </div>
+
+
+</nav>
+    <!-- ko ifnot: onSearchPage -->
+        
+<div class="osf-search" data-bind="fadeVisible: showSearch" style="display: none">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="input-group" data-bind="submit: submit">
+                    <input id="searchPageFullBar" name="search-placeholder" type="text" class="osf-search-input form-control" placeholder="Search" data-bind="value: query, hasFocus: true">
+                    <label id="searchBarLabel" class="search-label-placeholder" for="search-placeholder">Search</label>
+                    <span class="input-group-btn">
+                        <button type=button class="btn osf-search-btn" data-bind="click: submit"><i class="fa fa-circle-arrow-right fa-lg"></i></button>
+                        <button type=button class="btn osf-search-btn" data-toggle="modal" data-target="#search-help-modal"><i class="fa fa-question fa-lg"></i></button>
+                        <button type="button" class="btn osf-search-btn" data-bind="visible: showClose, click : toggleSearch"><i class="fa fa-times fa-lg"></i></button>
+                    </span>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="search-help-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span>&times;</button>
+                    <h3 class="modal-title" >Search help</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Queries</h4>
+                    <p>Search uses the <a href="http://extensions.xwiki.org/xwiki/bin/view/Extension/Search+Application+Query+Syntax">Lucene search syntax</a>.This gives you many options, but can be very simple as well. Examples of valid searches include:</p>
+                    <ul>
+                        <li><a href="/search/?q=repro*">repro*</a></li>
+                        <li><a href="/search/?q=brian+AND+title%3Amany">brian AND title:many</a></li>
+                        <li><a href="/search/?q=tags%3A%28psychology%29">tags:(psychology)</a></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+    <!-- /ko -->
+</div>
+
+    
+    
+    <div class="watermarked">
+        <div class="container 
+">
+
+
+            
+
+
+
+<div id="projectBanner" >
+    <header class="subhead" id="overview">
+        <nav id="projectSubnav" class="navbar osf-project-navbar" role="navigation">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".project-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars fa-lg"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs" href="/258nt/">
+                        Project Navigation
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse project-nav">
+                    <ul class="nav navbar-nav">
+
+                        <li>
+                            <a href="/258nt/"  class="project-title">
+                                hello
+                            </a>
+                        </li>
+                        <li id="projectNavFiles">
+                            <a href="/258nt/files/">
+                                Files
+                            </a>
+                        </li>
+                        <!-- Add-on tabs -->
+
+
+                                <li>
+                                    <a href="/258nt/wiki">
+
+                                        Wiki
+                                    </a>
+                                </li>
+
+                            <li><a href="/258nt/analytics/">Analytics</a></li>
+
+                            <li><a href="/258nt/registrations/">Registrations</a></li>
+
+                            <li><a href="/258nt/forks/">Forks</a></li>
+
+                            <li><a href="/258nt/contributors/">Contributors</a></li>
+
+                            <li><a href="/258nt/settings/">Settings</a></li>
+                        <li id="commentsLink">
+                            <a href="" class="visible-xs cp-handle" data-bind="click:removeCount" data-toggle="collapse" data-target="#projectSubnav .navbar-collapse">
+                                Comments
+                                <span data-bind="if: unreadComments() !== 0">
+                                    <span data-bind="text: displayCount" class="badge"></span>
+                                </span>
+                           </a>
+                       </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <style type="text/css">
+        .watermarked {
+            padding-top: 55px;
+        }
+    </style>
+
+
+
+
+
+
+</div>
+
+
+
+<div class="modal fade" id="showLinks">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Links to this project</h3>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Title</th>
+                        <th>Authors</th>
+                    </thead>
+                    <tbody data-bind="foreach: links">
+                        <tr>
+                            <td>
+                                <!-- ko if: url -->
+                                    <a data-bind="text: title, attr: {href: url}"></a>
+                                <!-- /ko -->
+                                <!-- ko ifnot: url -->
+                                    <span data-bind="text: title"></span>
+                                <!-- /ko -->
+                            </td>
+                            <td data-bind="text: authorShort"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- end modal-body -->
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+            </div><!-- end modal-footer -->
+        </div><!-- end modal-content -->
+    </div><!-- end modal-dialog -->
+</div><!-- end modal -->
+
+
+    
+
+
+<div class="page-header visible-xs">
+  <h2 class="text-300">Settings</h2>
+</div>
+
+<div class="row project-page">
+    <!-- Begin left column -->
+    <div class="col-sm-3 affix-parent scrollspy">
+
+
+            <div class="panel panel-default osf-affix" data-spy="affix" data-offset-top="0" data-offset-bottom="263"><!-- Begin sidebar -->
+                <ul class="nav nav-stacked nav-pills">
+
+                        <li><a href="#configureNodeAnchor">Project</a></li>
+
+                        <li><a href="#selectAddonsAnchor">Select Add-ons</a></li>
+
+
+                        <li><a href="#configureWikiAnchor">Wiki</a></li>
+
+                            <li><a href="#configureCommentingAnchor">Commenting</a></li>
+
+                            <li><a href="#configureInstitutionAnchor">Project Affiliation / Branding</a></li>
+
+                        <li><a href="#configureNotificationsAnchor">Email Notifications</a></li>
+
+
+
+                </ul>
+            </div><!-- End sidebar -->
+
+    </div>
+    <!-- End left column -->
+
+    <!-- Begin right column -->
+    <div class="col-sm-9">
+
+
+                <div class="panel panel-default">
+                    <span id="configureNodeAnchor" class="anchor"></span>
+                    <div class="panel-heading clearfix">
+                        <h3 id="configureNode" class="panel-title">Project</h3>
+                    </div>
+
+                    <div id="projectSettings" class="panel-body">
+                        <div class="form-group">
+                            <label>Category:</label>
+                            <select data-bind="options: categoryOptions, optionsValue: 'value', optionsText: 'label', value: selectedCategory"></select>
+                            <i>(For descriptive purposes)</i>
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input class="form-control" type="text" maxlength="200" placeholder="Required" data-bind="value: title,
+                                                                                                      valueUpdate: 'afterkeydown'">
+                            <span class="text-danger" data-bind="validationMessage: title"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea placeholder="Optional" data-bind="value: description,
+                                             valueUpdate: 'afterkeydown'",
+                            class="form-control resize-vertical" style="max-width: 100%"></textarea>
+                        </div>
+                           <button data-bind="click: cancelAll"
+                            class="btn btn-default">Cancel</button>
+                            <button data-bind="click: updateAll"
+                            class="btn btn-success">Save changes</button>
+                        <div class="help-block">
+                            <span data-bind="css: messageClass, html: message"></span>
+                        </div>
+                        <hr />
+                            <div class="help-block">
+                                A project cannot be deleted if it has any components within it.
+                                To delete a parent project, you must first delete all child components
+                                by visiting their settings pages.
+                            </div>
+                            <button id="deleteNode" class="btn btn-danger btn-delete-node">Delete project</button>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="panel panel-default">
+                    <span id="selectAddonsAnchor" class="anchor"></span>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Select Add-ons</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form id="selectAddonsForm">
+
+
+                                
+
+
+
+                                
+
+                                    <h3>Storage</h3>
+
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="s3"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                Amazon S3
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="box"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                Box
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="dataverse"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                Dataverse
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="dropbox"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                Dropbox
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="figshare"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                figshare
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="github"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                GitHub
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="googledrive"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                Google Drive
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="osfstorage"
+                                                    class="addon-select"
+                                                    checked
+                                                    disabled
+                                                />
+                                                OSF Storage
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="owncloud"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                ownCloud
+                                            </label>
+                                        </div>
+
+
+
+                                
+
+
+
+                                
+
+                                    <h3>Other</h3>
+
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="forward"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                External Link
+                                            </label>
+                                        </div>
+
+
+
+                                
+
+
+
+                                
+
+                                    <h3>Citations</h3>
+
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="mendeley"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                Mendeley
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="zotero"
+                                                    class="addon-select"
+                                                    
+                                                    
+                                                />
+                                                Zotero
+                                            </label>
+                                        </div>
+
+
+
+                            <br />
+
+                            <div class="addon-settings-message text-success" style="padding-top: 10px;"></div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="panel panel-default">
+                    <span id="configureWikiAnchor" class="anchor"></span>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Wiki</h3>
+                    </div>
+
+                <div class="panel-body">
+                        <form id="selectWikiForm">
+                            <div>
+                                <label>
+                                    <input
+                                            type="checkbox"
+                                            name="wiki"
+                                            class="wiki-select"
+                                            data-bind="checked: enabled"
+                                    />
+                                    Enable the wiki in <b>hello</b>.
+                                </label>
+
+                                <div data-bind="visible: enabled()" class="text-success" style="padding-left: 15px">
+                                    <p data-bind="text: wikiMessage"></p>
+                                </div>
+                                <div data-bind="visible: !enabled()" class="text-danger" style="padding-left: 15px">
+                                    <p data-bind="text: wikiMessage"></p>
+                                </div>
+                            </div>
+                        </form>
+
+                            <p class="text">To allow all OSF users to edit the wiki, <b>hello</b> must be public and the wiki enabled.</p>
+                    </div>
+                </div>
+
+
+
+                <div class="panel panel-default">
+                    <span id="configureCommentingAnchor" class="anchor"></span>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Commenting</h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <form class="form" id="commentSettings">
+
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="commentLevel" value="private" >
+                                    Only contributors can post comments
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="commentLevel" value="public" checked>
+                                    When the project is public, any OSF user can post comments
+                                </label>
+                            </div>
+
+                            <button class="btn btn-success">Save</button>
+
+                            <!-- Flashed Messages -->
+                            <div class="help-block">
+                                <p id="configureCommentingMessage"></p>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+                    <div class="panel panel-default scripted" id="institutionSettings">
+                    <span id="configureInstitutionAnchor" class="anchor"></span>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Project Affiliation / Branding</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="help-block">
+                            <!-- ko if: affiliatedInstitutions().length == 0 -->
+                            Projects can be affiliated with institutions that have created OSF for Institutions accounts.
+                            This allows:
+                            <ul>
+                               <li>institutional logos to be displayed on public projects</li>
+                               <li>public projects to be discoverable on specific institutional landing pages</li>
+                               <li>single sign-on to the OSF with institutional credentials</li>
+                               <li><a href="http://help.osf.io/m/os4i">FAQ</a></li>
+                            </ul>
+                            <!-- /ko -->
+                        </div>
+                        <!-- ko if: affiliatedInstitutions().length > 0 -->
+                        <label>Affiliated Institutions: </label>
+                        <!-- /ko -->
+                        <table class="table">
+                            <tbody>
+                                <!-- ko foreach: {data: affiliatedInstitutions, as: 'item'} -->
+                                <tr>
+                                    <td><img class="img-circle" width="50px" height="50px" data-bind="attr: {src: item.logo_path}"></td>
+                                    <td><span data-bind="text: item.name"></span></td>
+                                    <td>
+                                            <button data-bind="disable: $parent.loading(), click: $parent.clearInst" class="pull-right btn btn-danger">Remove</button>
+                                    </td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                            </br>
+                        <!-- ko if: availableInstitutions().length > 0 -->
+                        <label>Available Institutions: </label>
+                        <table class="table">
+                            <tbody>
+                                <!-- ko foreach: {data: availableInstitutions, as: 'item'} -->
+                                <tr>
+                                    <td><img class="img-circle" width="50px" height="50px" data-bind="attr: {src: item.logo_path}"></td>
+                                    <td><span data-bind="text: item.name"></span></td>
+                                        <td><button
+                                                data-bind="disable: $parent.loading(),
+                                                click: $parent.submitInst"
+                                                class="pull-right btn btn-success">Add</button></td>
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <span id="configureNotificationsAnchor" class="anchor"></span>
+                    <div class="panel-heading clearfix">
+                        <h3 class="panel-title">Email Notifications</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="help-block">
+                            <p class="text-muted">These notification settings only apply to you. They do NOT affect any other contributor on this project.</p>
+                        </div>
+                        <form id="notificationSettings" class="osf-treebeard-minimal">
+                            <div id="grid">
+                                <div class="spinner-loading-wrapper">
+                                    <div class="logo-spin logo-lg"></div>
+                                    <p class="m-t-sm fg-load-message"> Loading notification settings...  </p>
+                                </div>
+                            </div>
+                            <div class="help-block" style="padding-left: 15px">
+                                <p id="configureNotificationsMessage"></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+
+
+    </div>
+    <!-- End right column -->
+
+</div>
+
+
+
+
+
+    <script id="capabilities-box" type="text/html">
+
+<h3>Box Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of Box privacy. The OSF does not alter the permissions of linked Box folders.</td>
+            </tr>
+            <tr class="success">
+                <td>View / download file versions</td>
+                <td>Box files and their versions can be viewed/downloaded via OSF.</td>
+            </tr>
+            <tr class="success">
+                <td>Add / update files</td>
+                <td>Adding/updating files in the project via OSF will be reflected in Box.</td>
+            </tr>
+            <tr class="success">
+                <td>Delete files</td>
+                <td>Files deleted via OSF will be deleted in Box.</td>
+            </tr>
+            <tr class="warning">
+                <td>Logs</td>
+                <td>The OSF keeps track of changes you make to your Box content through the OSF, but not for changes made using Box directly.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy Box authorization unless the user forking the project is the same user who authorized the Box add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>Box content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-github" type="text/html">
+
+<h3>GitHub Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of making a GitHub repo public or private. The OSF does not alter the permissions of linked GitHub repos.</td>
+            </tr>
+            <tr class="success">
+                <td>View / download file versions</td>
+                <td>GitHub files and their versions can be viewed/downloaded via OSF.</td>
+            </tr>
+            <tr class="success">
+                <td>Add / update files</td>
+                <td>Adding/updating files in the project via OSF will be reflected in GitHub.</td>
+            </tr>
+            <tr class="success">
+                <td>Delete files</td>
+                <td>Files deleted via OSF will be deleted in GitHub.</td>
+            </tr>
+            <tr class="success">
+                <td>Logs</td>
+                <td>GitHub dynamically updates OSF logs when files are modified outside the OSF. Changes to GitHub repos made before the repo is linked to the OSF will not be reflected in OSF logs.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy Github authorization unless the user forking the project is the same user who authorized the Github add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>GitHub content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-s3" type="text/html">
+
+<h3>Amazon S3 Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of making an S3 bucket public or private. The OSF does not alter the permissions of linked S3 buckets.</td>
+            </tr>
+            <tr class="warning">
+                <td>View / download file versions</td>
+                <td>The S3 add-on supports file versions if versioning is enabled for your S3 buckets.</td>
+            </tr>
+            <tr class="success">
+                <td>Add / update files</td>
+                <td>Adding/updating files in the project via OSF will be reflected in Amazon S3.</td>
+            </tr>
+            <tr class="success">
+                <td>Delete files</td>
+                <td>Files deleted via OSF will be deleted in Amazon S3.</td>
+            </tr>
+            <tr class="warning">
+                <td>Logs</td>
+                <td>The OSF keeps track of changes you make to your S3 buckets through the OSF, but not for changes made using S3 directly.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy S3 authorization unless the user forking the project is the same user who authorized the S3 add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>S3 content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-figshare" type="text/html">
+
+<h3>figshare Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td> Making an OSF project public or private is independent of making figshare content public or private. The OSF does not alter the permissions of linked figshare content.</td>
+            </tr>
+            <tr class="warning">
+                <td>View / download file versions</td>
+                <td>figshare files can be viewed/downloaded via OSF, but version history is not supported.</td>
+            </tr>
+            <tr class="warning">
+                <td>Add / update files</td>
+                <td>Files can be added but not updated.</td>
+            </tr>
+            <tr class="warning">
+                <td>Delete files</td>
+                <td>Private files and filesets can be deleted via OSF.</td>
+            </tr>
+            <tr class="warning">
+                <td>Logs</td>
+                <td>OSF keeps track of changes you make to your figshare content through OSF, but not for changes made using figshare directly.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy figshare authorization unless the user forking the project is the same user who authorized the figshare add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>figshare content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-owncloud" type="text/html">
+
+<h3>ownCloud Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of ownCloud privacy. The OSF does not alter the permissions of linked ownCloud folders.</td>
+            </tr>
+            <tr class="warning">
+                <td>View / download file versions</td>
+                <td>ownCloud files can be viewed/downloaded via OSF, but version history is not supported by the ownCloud WebDAV API.</td>
+            </tr>
+            <tr class="success">
+                <td>Add / update files</td>
+                <td>Adding/updating files in the project via OSF will be reflected in ownCloud.</td>
+            </tr>
+            <tr class="success">
+                <td>Delete files</td>
+                <td>Files deleted via OSF will be deleted in ownCloud.</td>
+            </tr>
+            <tr class="warning">
+                <td>Logs</td>
+                <td>OSF keeps track of changes you make to your ownCloud content through OSF, but not for changes made using ownCloud directly.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy ownCloud authorization unless the user forking the project is the same user who authorized the ownCloud add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>ownCloud content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-dataverse" type="text/html">
+
+<h3>Dataverse Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of making a Dataverse study public or private. The OSF allows you to release the latest draft version of a Dataverse dataset.</td>
+            </tr>
+            <tr class="warning">
+                <td>View / download file versions</td>
+                <td>Files from the latest release of the selected Dataverse study can be viewed/downloaded. OSF users with write permissions can view/download draft files as well.</td>
+            </tr>
+            <tr class="success">
+                <td>Add / update files</td>
+                <td>Adding/updating files in the project via OSF will be reflected in Dataverse.</td>
+            </tr>
+            <tr class="success">
+                <td>Delete files</td>
+                <td>Files deleted via OSF will be deleted in Dataverse.</td>
+            </tr>
+            <tr class="warning">
+                <td>Logs</td>
+                <td>The OSF keeps track of changes you make to your Dataverse studies through the OSF, but not for changes made using Dataverse directly.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy Dataverse authorization unless the user forking the project is the same user who authorized the Dataverse add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>Dataverse content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-mendeley" type="text/html">
+
+<h3>Mendeley Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of making a Mendeley folder public or private. The OSF does not alter the permissions of a linked Mendeley folder.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy Mendeley authorization unless the user forking the project is the same user who authorized the Mendeley add-on in the source project being forked.</td>
+            </tr>
+            <tr class="danger">
+                <td>Registering</td>
+                <td>Mendeley content will not be registered.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-dropbox" type="text/html">
+
+<h3>Dropbox Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of Dropbox privacy. The OSF does not alter the permissions of linked Dropbox folders.</td>
+            </tr>
+            <tr class="success">
+                <td>View / download file versions</td>
+                <td>Dropbox files and their versions can be viewed/downloaded via OSF.</td>
+            </tr>
+            <tr class="success">
+                <td>Add / update files</td>
+                <td>Adding/updating files in the project via OSF will be reflected in Dropbox.</td>
+            </tr>
+            <tr class="success">
+                <td>Delete files</td>
+                <td>Files deleted via OSF will be deleted in Dropbox.</td>
+            </tr>
+            <tr class="warning">
+                <td>Logs</td>
+                <td>OSF keeps track of changes you make to your Dropbox content through OSF, but not for changes made using Dropbox directly.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy Dropbox authorization unless the user forking the project is the same user who authorized the Dropbox add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>Dropbox content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-googledrive" type="text/html">
+
+<h3>Google Drive Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of Google Drive privacy. The OSF does not alter the permissions of linked Google Drive folders.</td>
+            </tr>
+            <tr class="success">
+                <td>View / download file versions</td>
+                <td>Google Drive files and their versions can be viewed/downloaded via OSF.</td>
+            </tr>
+            <tr class="success">
+                <td>Add / update files</td>
+                <td>Adding/updating files in the project via OSF will be reflected in Google Drive.</td>
+            </tr>
+            <tr class="success">
+                <td>Delete files</td>
+                <td>Files deleted via OSF will be deleted in Google Drive.</td>
+            </tr>
+            <tr class="warning">
+                <td>Logs</td>
+                <td>The OSF keeps track of changes you make to your Google Drive content through the OSF, but not for changes made using Google Drive directly.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy Google Drive authorization unless the user forking the project is the same user who authorized the Google Drive add-on in the source project being forked.</td>
+            </tr>
+            <tr class="warning">
+                <td>Registering</td>
+                <td>Google Drive content will be registered, but version history will not be copied to the registration.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+    <script id="capabilities-zotero" type="text/html">
+
+<h3>Zotero Add-on Terms</h3>
+
+<table class="table table-bordered table-addon-terms">
+
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+            <tr class="warning">
+                <td>Permissions</td>
+                <td>Making an OSF project public or private is independent of making a Zotero folder public or private. The OSF does not alter the permissions of a linked Zotero folder.</td>
+            </tr>
+            <tr class="warning">
+                <td>Forking</td>
+                <td>Forking a project or component does not copy Zotero authorization unless the user forking the project is the same user who authorized the Zotero add-on in the source project being forked.</td>
+            </tr>
+            <tr class="danger">
+                <td>Registering</td>
+                <td>Zotero content will not be registered.</td>
+            </tr>
+    </tbody>
+
+</table>
+
+<ul>
+        <li>This add-on connects your OSF project to an external service. Use of this service is bound by its terms and conditions. The OSF is not responsible for the service or for your use thereof.</li>
+        <li>This add-on allows you to store files using an external service. Files added to this add-on are not stored within the OSF.</li>
+</ul>
+</script>
+
+
+
+
+
+        <div class="modal fade" id="duplicateModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4 class="f-w-lg">Links To This Project
+                                 <span class="btn btn-default disabled  pull-right">
+                                    0
+                                </span>
+                        </h4>
+                        
+<p>Linking to this project will reference it in another project, without
+creating a copy. The link will always point to the most up-to-date version.</p>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="f-w-lg">Templated From
+                            <span class="btn btn-default disabled pull-right">
+                                0
+                            </span>
+                        </h4>
+                        
+<p>This option will create a new project, using this project as a template.
+The new project will be structured in the same way, but contain no data.</p>
+
+                        <a class="btn btn-primary form-control"
+                           data-dismiss="modal"
+                           onclick="NodeActions.useAsTemplate();"
+                        >
+                            Copy Project Structure
+                        </a>
+
+                    </div>
+                    <div class="col-md-4">
+                        <h4 class="f-w-lg">Forks
+                            <button class="btn btn-default disabled pull-right"
+                            >
+                                0
+                            </button>
+                        </h4>
+                            
+<p>Fork this project if you plan to build upon it in your own work.
+The new project will be an exact duplicate of this project's current state,
+with you as the only contributor.</p>
+
+                            <a class="btn btn-primary form-control"
+                               data-dismiss="modal"
+                               onclick="NodeActions.forkNode();"
+                            >
+                                Fork this Project
+                            </a>
+                            <a class="btn btn-info btn-block m-t-xs" href="/258nt/forks/">View Forks</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+        </div><!-- end container -->
+    </div><!-- end watermarked -->
+
+
+
+
+    
+    <footer class="footer m-t-lg m-b-lg p-lg bg-color-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2 col-md-3 col-md-offset-1">
+                <h4>OSF</h4>
+                <ul>
+                    <li><a href="http://localhost:5000/explore/activity/">Explore</a></li>
+                    <li><script type="text/javascript">document.write("<n uers=\"znvygb:pbagnpg@bfs.vb\" ery=\"absbyybj\">Pbagnpg</n>".replace(/[a-zA-Z]/g,function(e){return String.fromCharCode((e<="Z"?90:122)>=(e=e.charCodeAt(0)+13)?e:e-26)}));</script><noscript>Contact OSF: <span class="obfuscated-email-noscript"><strong><u>cont<span style="display:none;">null</span>act@<span style="display:none;">null</span>osf.<span style="display:none;">null</span>io</u></strong></span></noscript></li>
+                    <li><a href="http://localhost:5000/support">FAQ/Guides</a></li>
+                    <li><a href="https://api.osf.io/v2/docs/">API</a></li>
+                    <li><a href="https://github.com/CenterForOpenScience/osf.io">Source Code</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-5 col-md-4">
+                <h4>Center for Open Science</h4>
+                <ul>
+                    <li><a href="http://cos.io">Home</a></li>
+                    <li><a href="http://localhost:5000/ezcuj/wiki/home/">Reproducibility Project: Psychology</a></li>
+                    <li><a href="http://localhost:5000/e81xl/wiki/home/">Reproducibility Project: Cancer Biology</a></li>
+                    <li><a href="http://cos.io/top/">TOP Guidelines</a></li>
+                     <li><a href="https://www.crowdrise.com/donate/charity/centerforopenscience">Donate</a></li>
+               </ul>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <h4>Socialize</h4>
+                <a href="http://twitter.com/OSFramework" aria-label="Twitter"><i class="fa fa-twitter fa-2x"></i></a>
+                <a href="https://www.facebook.com/OpenScienceFramework" aria-label="Facebook"><i class="fa fa-facebook fa-2x"></i></a>
+                <a href="https://groups.google.com/forum/#!forum/openscienceframework" aria-label="Google Group"><i class="fa fa-group fa-2x"></i></a>
+                <a href="https://www.github.com/centerforopenscience" aria-label="GitHub"><i class="fa fa-github fa-2x"></i></a>
+                <a href="https://plus.google.com/103557785986281627994" aria-label="Google Plus" rel="publisher"><i class="fa fa-google-plus fa-2x"></i></a>
+            </div> <!-- column -->
+        </div>
+    </div>
+</footer><!-- end footer -->
+
+
+    <div class="container copyright">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Copyright &copy; 2011-2017 <a href="https://cos.io/">Center for Open Science</a> |
+                <a href="https://github.com/CenterForOpenScience/centerforopenscience.org/blob/master/TERMS_OF_USE.md">Terms of Use</a> |
+                <a href="https://github.com/CenterForOpenScience/centerforopenscience.org/blob/master/PRIVACY_POLICY.md">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+</div><!-- end container copyright -->
+
+        
+
+        
+
+            <script>
+                window.ga = function() {};
+          </script>
+
+        <script>
+            // Mako variables accessible globally
+            window.contextVars = $.extend(true, {}, window.contextVars, {
+                waterbutlerURL: "http://localhost:7777/",
+                // Whether or not this page is loaded under osf.io or another domain IE: institutions
+                isOnRootDomain: "http://localhost:5000/" === window.location.origin + '/',
+                cookieName: "osf",
+                apiV2Prefix: "http://localhost:8000/v2/",
+                registerUrl: "/api/v1/register/",
+                currentUser: {
+                    id: "59q7z",
+                    locale: "en_US",
+                    timezone: "America/New_York",
+                    entryPoint: "osf",
+                    institutions: [{"logo_path": "/static/img/institutions/shields-rounded-corners/cos-shield-rounded-corners.png", "id": "cos", "name": "Center For Open Science [Test]"}],
+                    emailsToAdd: [],
+                    anon: {"country": null, "continent": null},
+                },
+                popular: null,
+                newAndNoteworthy: null,
+                maintenance: null,
+                analyticsMeta: {},
+            });
+        </script>
+
+
+
+        
+    
+
+<script src="/static/vendor/citeproc-js/xmldom.js"></script>
+<script src="/static/vendor/citeproc-js/citeproc.js"></script>
+
+<script>
+
+
+    var nodeId = "258nt";
+    var userApiUrl = "/api/v1/profile/59q7z/";
+    var nodeApiUrl = "/api/v1/project/258nt/";
+    var absoluteUrl = "localhost:5000/258nt";
+    
+
+    // Mako variables accessible globally
+    window.contextVars = $.extend(true, {}, window.contextVars, {
+        currentUser: {
+            username: "ggg@cos.io",
+            urls: {
+                api: userApiUrl,
+                profile: "/59q7z/"
+            },
+            isContributor: true,
+            fullname: "ggg",
+            isAdmin: true,
+            canComment: true,
+            canEdit: true,
+            gravatarUrl: "https://secure.gravatar.com/avatar/5b604f2862967fb982cd24057fe449ee?d=identicon&s=25"
+        },
+        node: {
+            id: nodeId,
+            title: "hello",
+            license: {},
+            urls: {
+                api: nodeApiUrl,
+                web: "/258nt/",
+                update: "/api/v1/project/258nt/"
+            },
+            isPublic: false,
+            isRegistration: false,
+            isRetracted: false,
+            isPreprint: false,
+            preprintFileId: null,
+            anonymous: false,
+            category: "project",
+            rootId: "258nt",
+            parentTitle: "",
+            parentRegisterUrl: "",
+            parentExists: false,
+            childExists: true,
+            registrationMetaSchemas: [],
+            registrationMetaData: {},
+            contributors: ["59q7z"]
+        }
+    });
+
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true},
+        // Don't automatically typeset the whole page. Must explicitly use MathJax.Hub.Typeset
+        skipStartupTypeset: true
+    });
+</script>
+<script type="text/javascript"
+    src="/static/vendor/bower_components/MathJax/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<script src=/static/public/js/project-base-page.js> </script>
+
+    <script>
+      window.contextVars = window.contextVars || {};
+      window.contextVars.node = window.contextVars.node || {};
+      window.contextVars.node.description = "";
+      window.contextVars.node.nodeType = "project";
+      window.contextVars.node.institutions = [{"logo_path": "/static/img/institutions/shields/cos-shield.png", "name": "Center For Open Science [Test]", "id": "cos"}];
+      window.contextVars.nodeCategories = {"analysis": "Analysis", "communication": "Communication", "data": "Data", "hypothesis": "Hypothesis", "instrumentation": "Instrumentation", "methods and measures": "Methods and Measures", "procedure": "Procedure", "project": "Project", "software": "Software", "other": "Other", "": "Uncategorized"};
+      window.contextVars.wiki = window.contextVars.wiki || {};
+      window.contextVars.wiki.isEnabled = true;
+      window.contextVars.currentUser = window.contextVars.currentUser || {};
+      window.contextVars.currentUser.institutions = [{"logo_path": "/static/img/institutions/shields/cos-shield.png", "name": "Center For Open Science [Test]", "id": "cos"}];
+      window.contextVars.analyticsMeta = $.extend(true, {}, window.contextVars.analyticsMeta, {
+          pageMeta: {
+              title: 'Settings',
+              pubic: false,
+          },
+      });
+    </script>
+
+    <script type="text/javascript" src=/static/public/js/project-settings-page.js></script>
+
+
+
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
